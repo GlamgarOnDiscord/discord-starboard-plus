@@ -20,7 +20,8 @@
         "discord-bot",
         "discord-starboard",
         "starboard-discord",
-        "djs-starboard"
+        "djs-starboard",
+        "discord-starboard-plus"
     ],
     "author": "glamgar",
     "license": "MIT",
