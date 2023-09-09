@@ -1,0 +1,33 @@
+{
+    "name": "discord-starboard-plus",
+    "version": "1.2.1",
+    "description": "Discord Starboard Plus: Effortlessly highlight your community's favorite messages with customizable starboards. Pin and celebrate standout content, tailor reaction requirements, add personalized messages, and enjoy detailed logging. Showcase your server's best moments and engage with members like never before. Turn your Discord server into a star-studded community with Starboard Plus!",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "discord",
+        "starboard",
+        "community",
+        "highlight",
+        "pin",
+        "message",
+        "reaction",
+        "log",
+        "server",
+        "engagement",
+        "community-management",
+        "discord-bot",
+        "discord-starboard",
+        "starboard-discord",
+        "djs-starboard"
+    ],
+    "author": "glamgar",
+    "license": "MIT",
+    "dependencies": {
+        "@types/node": "^18.0.6",
+        "discord-starboard-plus": "^1.0.0",
+        "discord.js": "^14.13.0",
+        "node-fetch": "^3.2.6"
+    }
+}
