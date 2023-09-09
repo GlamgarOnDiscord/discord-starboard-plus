@@ -65,7 +65,7 @@ class Starboard {
 
                 if (!existingStarboardMessage) {
                   const starEmbed = await this.createStarredEmbed(message, user);
-                  const starboardMessage = await starboardChannel.send(content, {
+                  const starboardMessage = await starboardChannel.send(null, {
                     embed: starEmbed
                   });
 
@@ -73,7 +73,7 @@ class Starboard {
 
                   this.log('ℹ️', 'Message pinned successfully!');
                 } else if (this.updateOnReaction) {
-                  await existingStarboardMessage.edit(content, {
+                  await existingStarboardMessage.edit(null, {
                     embed: {
                       description: `**Starred by ${user.tag}**\n${content}`,
                       image: image ? { url: image.url } : null
@@ -97,21 +97,31 @@ class Starboard {
   }
 
   async createStarredEmbed(message, user) {
-    return {
-      color: 0xFFAC33,
-      author: {
-        name: user.tag,
-        icon_url: user.displayAvatarURL({ dynamic: true }),
-      },
-      description: message.content,
-      timestamp: new Date().toISOString(),
-      fields: [
-        {
-          name: 'Source',
-          value: `[Go to message](${message.url})`,
+    const messageEmbed = message.embeds[0];
+
+    if (messageEmbed) {
+      return {
+        color: 0xFFAC33,
+        author: {
+          name: user.tag,
+          icon_url: user.displayAvatarURL({ dynamic: true }),
         },
-      ],
-    };
+        description: messageEmbed.description,
+        image: messageEmbed.image,
+        fields: messageEmbed.fields,
+        timestamp: new Date().toISOString(),
+      };
+    } else {
+      return {
+        color: 0xFFAC33,
+        author: {
+          name: user.tag,
+          icon_url: user.displayAvatarURL({ dynamic: true }),
+        },
+        description: message.content,
+        timestamp: new Date().toISOString(),
+      };
+    }
   }
 }
 
