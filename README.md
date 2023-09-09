@@ -1,9 +1,10 @@
 # ⭐ Discord Starboard Plus
 
+[![Discord Server](https://dcbadge.vercel.app/api/server/cG3SxzK3Vp)](https://discord.gg/cG3SxzK3Vp)
 [![npm version](https://img.shields.io/npm/v/discord-starboard-plus.svg?style=flat-square)](https://www.npmjs.com/package/discord-starboard-plus)
 [![npm downloads](https://img.shields.io/npm/dm/discord-starboard-plus.svg?style=flat-square)](https://www.npmjs.com/package/discord-starboard-plus)
 [![GitHub license](https://img.shields.io/github/license/GlamgarOnDiscord/discord-starboard-plus.svg?style=flat-square)](https://github.com/GlamgarOnDiscord/discord-starboard-plus/blob/master/LICENSE)
-[![Discord Server](https://dcbadge.vercel.app/api/server/cG3SxzK3Vp)](https://discord.gg/cG3SxzK3Vp)
+
 
 
 > Effortlessly highlight your community's favorite messages with customizable starboards. Pin and celebrate standout content, tailor reaction requirements, add personalized messages, and enjoy detailed logging. Showcase your server's best moments and engage with members like never before. Turn your Discord server into a star-studded community with Starboard Plus!
