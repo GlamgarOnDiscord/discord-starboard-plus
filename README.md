@@ -7,19 +7,19 @@
 > Effortlessly highlight your community's favorite messages with customizable starboards. Pin and celebrate standout content, tailor reaction requirements, add personalized messages, and enjoy detailed logging. Showcase your server's best moments and engage with members like never before. Turn your Discord server into a star-studded community with Starboard Plus!
 
 ## 🪐 Table of Contents
-- 📑 [Overview](#overview)
-- 🚀 [Features](#features)
-- 🏗️ [Project Structure](#project-structure)
-- 🧩 [Modules](#modules)
-- 🛠️ [Getting Started](#getting-started)
-  - 🔌 [Prerequisites](#prerequisites)
-  - ⬇️ [Installation](#installation)
-- 📖 [Usage](#usage)
-- 🧪 [Running Tests](#running-tests)
-- ⚡ [To-do](#todo)
-- 🤝 [Contributing](#contributing)
-- 📄 [License](#license)
-- 👏 [Credits](#credits)
+- 📑 [Overview](#📑-overview)
+- 🚀 [Features](#🚀-features)
+- 🏗️ [Project Structure](#🏗️-project-structure)
+- 🧩 [Modules](#🧩-modules)
+- 🛠️ [Getting Started](#🛠️-getting-started)
+  - 🔌 [Prerequisites](#🔌-prerequisites)
+  - ⬇️ [Installation](#⬇️-installation)
+- 📖 [Usage](#📖-usage)
+- 🧪 [Running Tests](#🧪-running-tests)
+- ⚡ [To-do](#⚡-to-do)
+- 🤝 [Contributing](#🤝-contributing)
+- 📄 [License](#📄-license)
+- 👏 [Credits](#👏-credits)
 
 
 ## 📑 Overview
@@ -40,12 +40,10 @@ Your package directory structure should resemble the following:
 discord-starboard-plus/
 ├── src/
 │ ├── starboard.js
-│ ├── ...
 ├── exemple.js
 ├── package.json
 └── README.md
 ```
-
 
 ## 🧩 Modules
 - `starboard.js`: The main module containing the Starboard class and logic for managing starboards.
@@ -115,4 +113,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 👏 Credits
 
 > All rights to this project are owned and all created by glamgar.
-"# discord-starboard-plus" 
+
