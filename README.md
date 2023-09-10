@@ -103,7 +103,10 @@ Tests for Discord Starboard Plus can be run using a testing framework like Mocha
 
 - [x] Add custom options.
 - [x] Create README.
-- [ ] Add starboard with image and new options.
+- [x] Add starboard with image and new options.
+- [x] Add new embed message.
+- [ ] Patch configurations.
+- [ ] Patch edit embed message.
 
 ## 🤝 Contributing
 
