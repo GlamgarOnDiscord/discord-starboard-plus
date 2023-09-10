@@ -1,6 +1,6 @@
 {
     "name": "discord-starboard-plus",
-    "version": "1.4.3",
+    "version": "1.4.4",
     "description": "Discord Starboard Plus: Effortlessly highlight your community's favorite messages with customizable starboards. Pin and celebrate standout content, tailor reaction requirements, add personalized messages, and enjoy detailed logging. Showcase your server's best moments and engage with members like never before. Turn your Discord server into a star-studded community with Starboard Plus!",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
