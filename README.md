@@ -85,6 +85,7 @@ const client = new Client({
 const starboardOptions = {
   starboardChannelID: 'YOUR_STARBOARD_CHANNEL_ID',
   requiredReactions: 1,
+  starEmoji: 'STAR_EMOJI' // Default : '⭐'
   // Add other options as needed
 };
 
