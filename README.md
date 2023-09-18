@@ -6,8 +6,9 @@
 [![GitHub license](https://img.shields.io/github/license/GlamgarOnDiscord/discord-starboard-plus.svg?style=flat-square)](https://github.com/GlamgarOnDiscord/discord-starboard-plus/blob/master/LICENSE)
 
 
-
 > Effortlessly highlight your community's favorite messages with customizable starboards. Pin and celebrate standout content, tailor reaction requirements, add personalized messages, and enjoy detailed logging. Showcase your server's best moments and engage with members like never before. Turn your Discord server into a star-studded community with Starboard Plus!
+
+> BIG UPDATES : New edit message system, more configuration, add message, image, custom emoji and videos !
 
 ## 🪐 Table of Contents
 - 📑 [Overview](#-overview)
@@ -69,7 +70,7 @@ To use Discord Starboard Plus in your bot, you need to create an instance of the
 
 ```js
 const { Client, GatewayIntentBits } = require('discord.js');
-const Starboard = require('discord-starboard-plus'); //Import module
+const Starboard = require('discord-starboard-plus'); // Import module
 
 const client = new Client({
   intents: [
@@ -85,7 +86,7 @@ const client = new Client({
 const starboardOptions = {
   starboardChannelID: 'YOUR_STARBOARD_CHANNEL_ID',
   requiredReactions: 1, // Default : '1'
-  starEmoji: 'STAR_EMOJI' // Default : '⭐'
+  starEmoji: 'STAR_EMOJI' // Default : '⭐' (for custom emoji need to use only name of emoji)
   // Add other options as needed 
 };
 
@@ -106,12 +107,14 @@ Tests for Discord Starboard Plus can be run using a testing framework like Mocha
 - [x] Create README.
 - [x] Add starboard with image and new options.
 - [x] Add new embed message.
-- [ ] Patch configurations.
-- [ ] Patch edit embed message.
+- [x] Patch configurations.
+- [x] Patch edit embed message.
+- [x] Adding videos, image, custom emoji.
+- [ ] Enable ignore guilds configuration and add more.
 
 ## 🤝 Contributing
 
-Contributions are welcome! If you have any ideas, bug reports, or feature requests, please open an issue or submit a pull request.
+Contributions are welcome! If you have any ideas, bug reports, or feature requests, please open an issue or submit a pull request in github repo.
 
 ## 📄 License
 
