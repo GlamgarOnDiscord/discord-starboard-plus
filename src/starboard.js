@@ -6,11 +6,11 @@ class Starboard {
     this.starboardChannelID = options.starboardChannelID || null;
     this.requiredReactions = options.requiredReactions || 1;
     this.ignoreBots = options.ignoreBots || true;
-    this.ignoreSelf = options.ignoreSelf || true;
+    this.ignoreSelf = options.ignoreSelf || false;
     this.ignoredChannels = options.ignoredChannels || [];
     this.updateOnReaction = options.updateOnReaction || true;
     this.logActions = options.logActions !== undefined ? options.logActions : true;
-    this.ignoreGuilds = options.ignoreGuilds || [];
+    this.ignoreGuilds = options.ignoreGuilds || []; // Soon
 
     if (!this.starboardChannelID) {
       throw new Error('starboardChannelID is required.');
@@ -44,43 +44,50 @@ class Starboard {
             const starboardChannel = server.channels.cache.get(this.starboardChannelID);
 
             if (!starboardChannel) {
-              console.log("Starboard channel not found.");
+              this.log('❌', `Error: Starboard channel not found.`);
               return;
             }
-
             if (reaction.count >= this.requiredReactions) {
               if (message.author.bot) {
                 return;
               }
+            
+              try {
+                const existingStarboardMessages = await starboardChannel.messages.fetch({ limit: 100 });
+            
+                if (!existingStarboardMessages) {
 
-              const existingStarboardMessages = await starboardChannel.messages.fetch({ limit: 100 });
+                  this.log('❌', `Error: Messages not fetched`);
+                  return;
 
-              if (!existingStarboardMessages) {
-                console.log("Messages not fetched");
-                return;
-              }
-
-              const existingStarboardMessage = existingStarboardMessages.find(msg => {
-                const embed = msg.embeds && msg.embeds[0];
-
-                if (!embed) {
-                  return false;
                 }
+            
+                const existingStarboardMessage = existingStarboardMessages.find(msg => {
+                  const embed = msg.embeds && msg.embeds[0];
+            
+                  if (!embed) {
+                    return false;
+                  }
+            
+                  const embedSource = embed?.fields?.[0]?.value;
+                  return embedSource === `[Go to message](${message.url})`;
+                });
+            
+                const starEmbed = await this.createStarredEmbed(message, user);
+            
+                if (!existingStarboardMessage) {
+                  this.sendStarboardMessage(starboardChannel, starEmbed);
+                } else if (this.updateOnReaction) {
+                  const users = await reaction.users.fetch();
+                  const realReactionCount = users.filter(user => !user.bot).size;
+                  let existingContent = existingStarboardMessage.content;
+                  existingContent = existingContent.replace(/💫 \*\*\d+\*\*/, `💫 **${realReactionCount}**`);
+                  existingStarboardMessage.edit(existingContent);
+                }
+              } catch (error) {
+                this.log('❌', `Error fetching messages: ${error}`);
 
-                return (embed.description && embed.description.includes(message.url));
-              });
-
-              const starEmbed = await this.createStarredEmbed(message, user);
-
-              if (!existingStarboardMessage) {
-                this.sendStarboardMessage(starboardChannel, starEmbed);
-              } else if (this.updateOnReaction) {
-                // Mise à jour du compteur de réactions uniquement
-                const existingEmbed = existingStarboardMessage.embeds[0];
-                existingEmbed.fields[0].value = starEmbed.fields[0].value;
-                this.updateStarboardMessage(existingStarboardMessage, existingEmbed);
               }
-              
             }
           } else {
             throw new Error('Server not found or ignored by configuration.');
@@ -91,10 +98,19 @@ class Starboard {
       }
     });
   }
+
+  // Create embed
+
   async createStarredEmbed(message, user) {
     let embedDescription = message.content;
-    const reaction = message.reactions.cache.get(this.starEmoji);
-    const reactionCount = reaction ? (reaction.users.cache.has(message.author.id) ? reaction.count - 1 : reaction.count) : 0;
+    const reactions = message.reactions.cache;
+    let reactionCount = 0;
+
+reactions.forEach((reaction) => {
+  const count = this.ignoreSelf ? reaction.count - 1 : reaction.count;
+  reactionCount += count;
+});
+
     const channelMention = `<#${message.channel.id}>`;
     const content = `💫 **${reactionCount}** ${channelMention}`;
 
@@ -113,6 +129,12 @@ class Starboard {
       ],
     };
 
+    const videoAttachment = message.attachments.find(attachment => attachment.contentType.startsWith('video'));
+
+    if (videoAttachment) {
+      embedDescription += `\n\n${videoAttachment.url}`;
+    }
+
     if(embedDescription) {
       embed.description = embedDescription;
     }
@@ -128,30 +150,21 @@ class Starboard {
       content
     }}
   
-
+ 
+  // Send embed
   async sendStarboardMessage(starboardChannel, data) {
     // Check if the embed and its description are not empty
     const { embed, content } = data;
 
     if ((embed && embed.description && embed.description.trim() !== "") || (embed && embed.image)) {
-      const starboardMessage = await starboardChannel.send({content: content, embeds: [embed] }); // Utilisez un tableau pour l'embed
+      const starboardMessage = await starboardChannel.send({content: content, embeds: [embed] });
       this.log('ℹ️', 'Message pinned successfully!');
     } else {
-      console.log("Embed is empty or missing description; nothing to send");
+      this.log('❌', `Error: Embed is empty or missing description; nothing to send.`);
     }
   }
   
   
-  async updateStarboardMessage(existingMessage, data) {
-    const { embed, content } = data;
-    // Check if the embed and its description are not empty
-    if (embed && embed.description && embed.description.trim() !== "") {
-      await existingMessage.edit({content: content, embeds: embed });
-      this.log('ℹ️', 'Pinned message updated successfully!');
-    } else {
-      console.log("Embed description is empty; nothing to update");
-    }
-  }
 }
 
 module.exports = Starboard;
