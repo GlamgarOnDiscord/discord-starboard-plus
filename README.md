@@ -1,6 +1,5 @@
 # ⭐ Discord Starboard Plus
 
-[![Discord Server](https://dcbadge.vercel.app/api/server/cG3SxzK3Vp)](https://discord.gg/cG3SxzK3Vp)
 [![npm version](https://img.shields.io/npm/v/discord-starboard-plus.svg?style=flat-square)](https://www.npmjs.com/package/discord-starboard-plus)
 [![npm downloads](https://img.shields.io/npm/dm/discord-starboard-plus.svg?style=flat-square)](https://www.npmjs.com/package/discord-starboard-plus)
 [![GitHub license](https://img.shields.io/github/license/GlamgarOnDiscord/discord-starboard-plus.svg?style=flat-square)](https://github.com/GlamgarOnDiscord/discord-starboard-plus/blob/master/LICENSE)
@@ -36,6 +35,7 @@ The Discord Starboard Plus is a powerful and customizable Discord bot module tha
 - **Personalized Messages:** Add custom messages to your starboard entries to engage with your community.
 - **Logging:** Detailed logging options to keep track of starred messages and bot actions.
 - **Ignore Configuration:** Configure which channels or guilds to ignore when monitoring reactions.
+
 
 ## 🏗️ Project Structure
 Your package directory structure should resemble the following:
@@ -87,7 +87,7 @@ const starboardOptions = {
   starboardChannelID: 'YOUR_STARBOARD_CHANNEL_ID',
   requiredReactions: 1, // Default : '1'
   starEmoji: 'STAR_EMOJI' // Default : '⭐' (for custom emoji need to use only name of emoji)
-  // Add other options as needed 
+  // Add other options as needed see all options in the src/starboard.js file
 };
 
 client.once('ready', () => {
